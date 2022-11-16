@@ -22,22 +22,8 @@
   
 ## Package
 ``` 
-📂app
- ┣ 📂data
- ┃ ┣ 📂datasource
- ┃ ┣ 📂entity
- ┃ ┣ 📂repository
- ┃ ┣ 📂service 
- ┃ ┗ 📂util
- ┣ 📂domain
- ┃ ┣ 📂model
- ┃ ┣ 📂repository
- ┃ ┗ 📂util
- ┗ 📂presentaion
-   ┣ 📂application
-   ┣ 📂di
-   ┣ 📂network
-   ┣ 📂ui
-   ┣ 📂util
-   ┗ 📂viewmodel
+📂
+ ┣ 📂
+ ┃ ┣ 📂
+ ┃ ┣ 📂
 ```

@@ -21,6 +21,8 @@ class CreditService {
             insertGrade()
         case "4":
             removeCredit()
+        case "5":
+            showAverageGrade()
         default: break
         }
     }
@@ -125,12 +127,56 @@ class CreditService {
             print("\(input1Name) 학생을 찾지 못했습니다.")
 
         }
+    }
+    
+    //평점보기
+    static private func showAverageGrade() {
+        let input = readLine()
+        let studentInput = String(input ?? "")
         
-        
-        
-        
-        
-        
+
+        if students.filter({ $0.name == studentInput })[safe: 0] != nil {
+            guard let findIndex = students.firstIndex(where: {$0.name == studentInput}) else { return }
+            
+            if students[findIndex].credit.isEmpty {
+                print("성적이 존재하지않습니다.")
+            }else {
+                let studentCredit = students[findIndex].credit
+                let allGrade : Int = 0
+                for i in studentCredit {
+                    print("\(i?.subject): \(i?.score)")
+                    allGrade += i?.score
+                }
+                print("평점: \(allGrade / studentCredit.count)")
+            }
+        } else {
+            print("\(studentInput) 학생을 찾지못했습니다.")
+        }
+    }
+    
+    private func changeGradeToInt(_ grade:String) -> Double {
+        switch grade {
+        case "A+":
+            return 4.5
+        case "A":
+            return 4
+        case "B+":
+            return 3.5
+        case "B":
+            return 3
+        case "C+":
+            return 2.5
+        case "C":
+            return 2
+        case "D+":
+            return 1.5
+        case "D":
+            return 1
+        case "F":
+            return 0
+        default:
+            return -100
+        }
     }
     
 }

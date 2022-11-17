@@ -19,10 +19,13 @@ class CreditService {
             removeStudent()
         case "3":
             insertGrade()
+        case "4":
+            removeCredit()
         default: break
         }
     }
     
+    //학생추가
     static private func addStudent() {
         let input = readLine()
         let studentInput = String(input ?? "")
@@ -37,7 +40,7 @@ class CreditService {
         }
     }
 
-    
+    //학생삭제
     static private func removeStudent() {
         let input = readLine()
         let studentInput = String(input ?? "")
@@ -51,6 +54,7 @@ class CreditService {
         }
     }
     
+    //성적추가(변경)
     static private func insertGrade() {
         let input = readLine()?.components(separatedBy: " ")
         
@@ -87,5 +91,46 @@ class CreditService {
         }
     }
     
+    
+    //성적삭제
+    static private func removeCredit() {
+        let input = readLine()?.components(separatedBy: " ")
+        
+        let input1Name = String(input?[safe:0] ?? "1x")
+        let input2Subject = String(input?[safe:1] ?? "2x")
+        
+        guard input1Name != "1x" && input2Subject != "2x" else {
+            print("입력이 잘못되었습니다. 다시확인해주세요")
+            return
+        }
+        
+        
+        if students.filter({$0.name == input1Name})[safe: 0] != nil {
+            guard let studentIndex = students.firstIndex(where: {$0.name == input1Name}) else { return }
+            
+            if students[studentIndex].credit.map({$0?.subject == input2Subject})[safe: 0] != nil {
+                
+                guard let creditIndex = students[studentIndex].credit.firstIndex(where: {$0?.subject == input2Subject}) else {
+                    return
+                }
+                
+                students[studentIndex].credit.remove(at: creditIndex)
+                
+                print("\(input1Name) 학생의 \(input2Subject) 성적을 삭제했습니다.")
+                
+            } else {
+                print("\(input2Subject) 과목이 존재하지 않습니다. ")
+            }
+        }else {
+            print("\(input1Name) 학생을 찾지 못했습니다.")
+
+        }
+        
+        
+        
+        
+        
+        
+    }
     
 }

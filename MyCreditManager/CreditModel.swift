@@ -13,6 +13,6 @@ struct CreditModel {
     
     struct Credit {
         var subject : String
-        var score : String
+        var grade : Double
     }
 }

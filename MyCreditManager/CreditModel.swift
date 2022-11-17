@@ -9,7 +9,7 @@ import Foundation
 
 struct CreditModel {
     let name: String
-    var credit : [Credit]?
+    var credit : [Credit?]
     
     struct Credit {
         var subject : String

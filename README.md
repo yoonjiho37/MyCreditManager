@@ -22,8 +22,9 @@
   
 ## Package
 ``` 
-📂
- ┣ 📂
- ┃ ┣ 📂
- ┃ ┣ 📂
+📂 MyCreditManager
+ ┣ 📂 CreditModel
+ ┣ 📂 CreditService
+ ┣ 📂 main
+ ┣ 📂 Util
 ```

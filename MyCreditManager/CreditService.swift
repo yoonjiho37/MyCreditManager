@@ -69,8 +69,13 @@ class CreditService {
             print("입력이 잘못되었습니다. 다시확인해주세요")
             return
         }
+        let input3ToDouble = changeGradeToInt(input3Grade)
+        guard input3ToDouble != -100 else {
+            print("입력이 잘못되었습니다. 다시확인해주세요")
+            return
+        }
         
-        let grade = CreditModel.Credit(subject: input2Subject, score: input3Grade)
+        let grade = CreditModel.Credit(subject: input2Subject, grade: input3ToDouble)
         
         if students.map({$0.name == input1Name})[safe:0] != nil {
             guard let findIndex = students.firstIndex(where: {$0.name == input1Name}) else {
@@ -142,19 +147,25 @@ class CreditService {
                 print("성적이 존재하지않습니다.")
             }else {
                 let studentCredit = students[findIndex].credit
-                let allGrade : Int = 0
+                var allGrade : Double = 0
                 for i in studentCredit {
-                    print("\(i?.subject): \(i?.score)")
-                    allGrade += i?.score
+                    
+                    
+                    if let ii = i {
+                        print("\(ii.subject): \(ii.grade)")
+                        allGrade += ii.grade
+                    }
+                    
+                    
                 }
-                print("평점: \(allGrade / studentCredit.count)")
+                print("평점: \(allGrade / Double(studentCredit.count))")
             }
         } else {
             print("\(studentInput) 학생을 찾지못했습니다.")
         }
     }
     
-    private func changeGradeToInt(_ grade:String) -> Double {
+    static private func changeGradeToInt(_ grade:String) -> Double {
         switch grade {
         case "A+":
             return 4.5

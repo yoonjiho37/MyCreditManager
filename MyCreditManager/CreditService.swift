@@ -67,15 +67,14 @@ class CreditService {
     //성적추가(변경)
     static private func insertGrade() {
         let input = readLine()
-        let inputString = String(input ?? "")
         guard filterText(text: input, filter: "KR") else {
             print("입력이 잘못되였습니다. 확인해주세요.")
             return
         }
-        let componetInput = input?.components(separatedBy: " ")
-        let input1Name = String(componetInput?[safe:0] ?? "1x")
-        let input2Subject = String(componetInput?[safe:1] ?? "2x")
-        let input3Grade = String(componetInput?[safe:2] ?? "3x")
+        let componentInput = input?.components(separatedBy: " ")
+        let input1Name = String(componentInput?[safe:0] ?? "1x")
+        let input2Subject = String(componentInput?[safe:1] ?? "2x")
+        let input3Grade = String(componentInput?[safe:2] ?? "3x")
         
         
         

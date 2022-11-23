@@ -31,7 +31,10 @@ class CreditService {
     static private func addStudent() {
         let input = readLine()
         let studentInput = String(input ?? "")
-        
+        guard filterText(text: studentInput, filter: "KR/space") else {
+            print("입력이 잘못되였습니다. 확인해주세요.")
+            return
+        }
 
         if students.filter({ $0.name == studentInput })[safe: 0] == nil {
             let student = CreditModel(name: studentInput, credit: [])
@@ -46,6 +49,11 @@ class CreditService {
     static private func removeStudent() {
         let input = readLine()
         let studentInput = String(input ?? "")
+        print("filter => \(filterText(text: studentInput, filter: "KR/space"))")
+        guard filterText(text: studentInput, filter: "KR/space") else {
+            print("입력이 잘못되였습니다. 확인해주세요.")
+            return
+        }
         
         if students.filter({ $0.name == studentInput})[safe: 0] != nil {
             guard let removeIndex = students.firstIndex(where: {$0.name == studentInput}) else { return }
@@ -58,17 +66,23 @@ class CreditService {
     
     //성적추가(변경)
     static private func insertGrade() {
-        let input = readLine()?.components(separatedBy: " ")
+        let input = readLine()
+        guard filterText(text: input, filter: "KR") else {
+            print("입력이 잘못되였습니다. 확인해주세요.")
+            return
+        }
+        let componentInput = input?.components(separatedBy: " ")
+        let input1Name = String(componentInput?[safe:0] ?? "1x")
+        let input2Subject = String(componentInput?[safe:1] ?? "2x")
+        let input3Grade = String(componentInput?[safe:2] ?? "3x")
         
-        let input1Name = String(input?[safe:0] ?? "1x")
-        let input2Subject = String(input?[safe:1] ?? "2x")
-        let input3Grade = String(input?[safe:2] ?? "3x")
         
         
         guard input1Name != "1x" && input2Subject != "2x" && input3Grade != "3x" else {
             print("입력이 잘못되었습니다. 다시확인해주세요")
             return
         }
+        
         let input3ToDouble = changeGradeToInt(input3Grade)
         guard input3ToDouble != -100 else {
             print("입력이 잘못되었습니다. 다시확인해주세요")
@@ -101,10 +115,18 @@ class CreditService {
     
     //성적삭제
     static private func removeCredit() {
-        let input = readLine()?.components(separatedBy: " ")
+        let input = readLine()
         
-        let input1Name = String(input?[safe:0] ?? "1x")
-        let input2Subject = String(input?[safe:1] ?? "2x")
+        guard filterText(text: input, filter: "KR") else {
+            print("입력이 잘못되였습니다. 확인해주세요.")
+            return
+        }
+        let componetInput = input?.components(separatedBy: " ")
+        let input1Name = String(componetInput?[safe:0] ?? "1x")
+        let input2Subject = String(componetInput?[safe:1] ?? "2x")
+        
+        print("111 => \(input1Name)")
+        print("222 => \(input2Subject)")
         
         guard input1Name != "1x" && input2Subject != "2x" else {
             print("입력이 잘못되었습니다. 다시확인해주세요")
@@ -138,6 +160,10 @@ class CreditService {
     static private func showAverageGrade() {
         let input = readLine()
         let studentInput = String(input ?? "")
+        guard filterText(text: studentInput, filter: "KR/space") else {
+            print("입력이 잘못되였습니다. 확인해주세요.")
+            return
+        }
         
 
         if students.filter({ $0.name == studentInput })[safe: 0] != nil {
@@ -164,6 +190,8 @@ class CreditService {
             print("\(studentInput) 학생을 찾지못했습니다.")
         }
     }
+    
+    
     
     static private func changeGradeToInt(_ grade:String) -> Double {
         switch grade {
